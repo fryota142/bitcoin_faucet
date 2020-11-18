@@ -9,4 +9,8 @@ html
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
     = stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload'
   body
-    = yield
+    .container
+      - flash.each do |name, msg|
+        div.alert class="alert-#{name}"
+          = msg.html_safe
+      = yield
