@@ -3,3 +3,17 @@
 
 .col-12.col-lg-8.text-center.mx-auto
   h2 = "残高：#{@amount}BTC"
+  br
+  = form_with url: faucet_path do |f|
+    .row
+      .col-8
+        .form-group
+          = f.label :アドレス
+          = f.text_field :to_address, class: 'form-control'
+      .col-2
+        .form-group
+          = f.label :送金額
+          = f.number_field :amount, step: "0.01", class: 'form-control'
+      .col-2.align-self-end
+        .form-group
+          = f.submit '送金', class: 'btn btn-primary'

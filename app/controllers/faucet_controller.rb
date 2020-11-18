@@ -9,4 +9,14 @@ class FaucetController < ApplicationController
   def index
     @amount = @client.listunspent.sum { |utxo| utxo['amount'].to_f}
   end
+
+  def create
+    txid = @client.sendtoaddress(params[:to_address], params[:amount])
+
+    if txid
+      flash[:success] = '送金に成功しました'
+    end
+
+    redirect_to root_path
+  end
 end
