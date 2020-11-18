@@ -8,12 +8,14 @@ class FaucetController < ApplicationController
 
   def index
     @amount = @client.listunspent.sum { |utxo| utxo['amount'].to_f}
+    @histories = History.all
   end
 
   def create
     txid = @client.sendtoaddress(params[:to_address], params[:amount])
 
     if txid
+      History.create(to_address: params[:to_address], amount: params[:amount].to_f, txid: txid)
       flash[:success] = '送金に成功しました'
     end
 
