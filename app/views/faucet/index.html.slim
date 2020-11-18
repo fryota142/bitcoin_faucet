@@ -17,3 +17,17 @@
       .col-2.align-self-end
         .form-group
           = f.submit '送金', class: 'btn btn-primary'
+
+br
+
+table.table.table-sm.table-responsive-sm.text-nowrap
+  tr
+    th TXID
+    th 送金先
+    th 送金額
+  tbody
+    - @histories.each do |history|
+      tr
+        td = history.txid
+        td = history.to_address
+        td = history.amount
